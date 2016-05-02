@@ -1,4 +1,4 @@
-package com.example.tetrimino.programLogic;
+package com.example.tetrimino.subnetcalculator.programLogic;
 
 /**
  * Created by Tetrimino on 1.5.2016..

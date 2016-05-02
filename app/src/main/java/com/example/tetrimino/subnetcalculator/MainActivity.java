@@ -7,14 +7,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.util.Log;
 
-import com.example.tetrimino.programLogic.IPAddress;
-import com.example.tetrimino.programLogic.IPAddressClassA;
+import com.example.tetrimino.subnetcalculator.programLogic.IPAddressClassA;
 
 public class MainActivity extends AppCompatActivity {
     private Button goButton;
     private EditText firstOctetText, secondOctetText, thirdOctetText, fourthOctetText, cidrText;
     private TextView subnetID, broadcast, firstHost, lastHost;
+    private static final String TAG = "Ja sam poruka";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG, "shit has happened");
                 Toast.makeText(v.getContext(), "You clicked the button", Toast.LENGTH_LONG).show();
                 stuffHappens();
             }
