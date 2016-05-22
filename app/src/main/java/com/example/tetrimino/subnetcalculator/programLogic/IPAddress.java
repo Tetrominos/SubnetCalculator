@@ -5,6 +5,7 @@ import android.util.Log;
 
 /**
  * Created by Tetrimino on 1.5.2016..
+ * Holds information about the IP address, and methods to manipulate same address and calculate subnet information
  */
 public class IPAddress {
     int firstOctet, secondOctet, thirdOctet, fourthOctet, Cidr;
@@ -22,6 +23,11 @@ public class IPAddress {
         setClass(Cidr);
     }
 
+    /**
+     * Returns subnet ID adress based on the IP address class type
+     * example: 192.168.100.0
+     * @return returns subnet ID adress
+     */
     public String getSubnetId(){
         switch(addressClass){
             case A:
@@ -36,6 +42,11 @@ public class IPAddress {
         return "error";
     }
 
+    /**
+     * Returns broadcast address based on the IP address class type
+     * example: 192.168.100.255
+     * @return returns broadcast address
+     */
     public String getBroadcast(){
         switch(addressClass){
             case A:
@@ -50,6 +61,11 @@ public class IPAddress {
         return "error";
     }
 
+    /**
+     * Returns first host address based on the IP address class type
+     * example: 192.168.100.1
+     * @return returns first host address
+     */
     public String getFirstHost(){
         switch(addressClass){
             case A:
@@ -64,6 +80,11 @@ public class IPAddress {
         return "error";
     }
 
+    /**
+     * Returns last host address based on the IP address class type
+     * example: 192.168.100.254
+     * @return returns last host address
+     */
     public String getLastHost() {
         switch(addressClass){
             case A:
@@ -78,6 +99,11 @@ public class IPAddress {
         return "error";
     }
 
+    /**
+     * Turns a decimal number into a binary octet
+     * @param octet passed octet in decimal format
+     * @return      binary value of octet in string format, 8 bits long
+     */
     public String octetIntoBinary(int octet){
         String octetInBinary = Integer.toBinaryString(octet);
         while(octetInBinary.length()<8) {
@@ -87,7 +113,14 @@ public class IPAddress {
         return octetInBinary;
     }
 
-    public int octetChangedTo(String octet,int cidr, int BroadOrID){
+    /**
+     * Calculates binary value of a broadcast or subnet ID (based on the BroadOrID parameter) from a binary octet
+     * @param octet     original octet
+     * @param cidr      cidr, used to calculate how many bits need to be changed
+     * @param BroadOrID what the change the bits into
+     * @return          returns the broadcast or subnet ID
+     */
+    public int octetChangedTo(String octet, int cidr, int BroadOrID){
         String changedOctet = octet.substring(0, cidr%8);
         while(changedOctet.length()<8) {
             changedOctet += BroadOrID;
@@ -97,6 +130,10 @@ public class IPAddress {
         return Integer.parseInt(changedOctet, 2);
     }
 
+    /**
+     * Sets the class of the address based on the cidr
+     * @param cidr  cidr
+     */
     public void setClass(int cidr){
         switch(cidr/8){
             case 1:
@@ -108,6 +145,10 @@ public class IPAddress {
         }
     }
 
+    /**
+     * gives the octet variables values based on the string that was passed to it
+     * @param ip IP address in string form
+     */
     public void IPStringToOctets(String ip){
         int firstDotIndex, secondDotIndex,thirdDotIndex;
         firstDotIndex = ip.indexOf(".");

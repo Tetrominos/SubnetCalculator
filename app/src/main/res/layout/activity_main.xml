@@ -20,7 +20,9 @@
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card_view:cardCornerRadius="2dp">
+        card_view:cardCornerRadius="2dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
 
             <RelativeLayout
@@ -48,7 +50,7 @@
                     android:layout_below="@id/ipAddressTextView"
                     android:inputType="number"
                     android:digits="1234567890."
-                    android:maxLength="20"
+                    android:maxLength="16"
                     android:id="@+id/ipAddress"
                     android:imeOptions="actionNext"
                     android:textSize="20sp"

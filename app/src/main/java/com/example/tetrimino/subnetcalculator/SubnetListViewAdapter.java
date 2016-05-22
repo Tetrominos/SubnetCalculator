@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * Created by dmajc on 22.5.2016..
+ * Contains custom View Adapter for the subnet_list_row.xml row layout
  */
 public class SubnetListViewAdapter extends ArrayAdapter<String> {
 
@@ -32,7 +33,6 @@ public class SubnetListViewAdapter extends ArrayAdapter<String> {
 
         title.setText(titles[position]);
         value.setText(data[position]);
-
 
         return rowView;
     }
