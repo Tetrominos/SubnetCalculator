@@ -22,10 +22,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initializeInput();
-        initializeTextViews();
+        /*initializeInput();
+        initializeTextViews();*/
 
-        goButton = (Button) findViewById(R.id.goButton);
+        /*goButton = (Button) findViewById(R.id.goButton);
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,15 +33,15 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(v.getContext(), "You clicked the button", Toast.LENGTH_LONG).show();
                 stuffHappens();
             }
-        });
+        });*/
     }
 
     public void stuffHappens(){
         IPAddress ipAddress = new IPAddress(Integer.parseInt(firstOctetText.getText().toString()),
-                                                    Integer.parseInt(secondOctetText.getText().toString()),
-                                                    Integer.parseInt(thirdOctetText.getText().toString()),
-                                                    Integer.parseInt(fourthOctetText.getText().toString()),
-                                                    Integer.parseInt(cidrText.getText().toString()));
+                                            Integer.parseInt(secondOctetText.getText().toString()),
+                                            Integer.parseInt(thirdOctetText.getText().toString()),
+                                            Integer.parseInt(fourthOctetText.getText().toString()),
+                                            Integer.parseInt(cidrText.getText().toString()));
 
         subnetID.setText(ipAddress.getSubnetId());
         broadcast.setText(ipAddress.getBroadcast());
@@ -49,13 +49,13 @@ public class MainActivity extends AppCompatActivity {
         lastHost.setText(ipAddress.getLastHost());
     }
 
-    public void initializeInput(){
+    /*public void initializeInput(){
         firstOctetText = (EditText) findViewById(R.id.firstOctet);
         secondOctetText = (EditText) findViewById(R.id.secondOctet);
         thirdOctetText = (EditText) findViewById(R.id.thirdOctet);
         fourthOctetText = (EditText) findViewById(R.id.fourthOctet);
         cidrText = (EditText) findViewById(R.id.CIDR);
-    }
+    }*/
 
     public void initializeTextViews(){
         subnetID = (TextView) findViewById(R.id.subnetID);
