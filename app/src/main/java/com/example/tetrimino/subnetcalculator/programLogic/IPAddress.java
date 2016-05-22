@@ -1,5 +1,6 @@
 package com.example.tetrimino.subnetcalculator.programLogic;
 
+import android.content.Intent;
 import android.util.Log;
 
 /**
@@ -15,12 +16,9 @@ public class IPAddress {
 
     AddressClass addressClass;
 
-    public IPAddress(int first, int second, int third, int fourth, int cidr){
-        firstOctet = first;
-        secondOctet = second;
-        thirdOctet = third;
-        fourthOctet = fourth;
-        Cidr = cidr;
+    public IPAddress(String ipAddress, int cidr){
+        IPStringToOctets(ipAddress);
+        this.Cidr = cidr;
         setClass(Cidr);
     }
 
@@ -108,6 +106,17 @@ public class IPAddress {
             case 3:
                 addressClass = AddressClass.C;
         }
+    }
+
+    public void IPStringToOctets(String ip){
+        int firstDotIndex, secondDotIndex,thirdDotIndex;
+        firstDotIndex = ip.indexOf(".");
+        secondDotIndex = ip.indexOf(".", firstDotIndex + 1);
+        thirdDotIndex = ip.indexOf(".", secondDotIndex + 1);
+        firstOctet = Integer.parseInt(ip.substring(0, firstDotIndex));
+        secondOctet = Integer.parseInt(ip.substring(firstDotIndex + 1, secondDotIndex));
+        thirdOctet = Integer.parseInt(ip.substring(secondDotIndex + 1, thirdDotIndex));
+        fourthOctet = Integer.parseInt(ip.substring(thirdDotIndex + 1));
     }
 }
 

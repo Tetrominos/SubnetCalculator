@@ -208,7 +208,7 @@
 
     <!--</RelativeLayout>-->
 
-    <TextView
+    <!--<TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Subnet ID"
@@ -281,6 +281,13 @@
         android:id="@+id/lastHost"
         android:layout_alignTop="@+id/lastHostText"
         android:layout_alignLeft="@+id/firstHost"
-        android:layout_alignStart="@+id/firstHost" />
+        android:layout_alignStart="@+id/firstHost" />-->
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:layout_below="@id/card_view"
+        />
 
 </RelativeLayout>
