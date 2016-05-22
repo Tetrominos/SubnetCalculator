@@ -9,7 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.util.Log;
 
-import com.example.tetrimino.subnetcalculator.programLogic.IPAddressClassA;
+import com.example.tetrimino.subnetcalculator.programLogic.IPAddress;
 
 public class MainActivity extends AppCompatActivity {
     private Button goButton;
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void stuffHappens(){
-        IPAddressClassA ipAddress = new IPAddressClassA(Integer.parseInt(firstOctetText.getText().toString()),
+        IPAddress ipAddress = new IPAddress(Integer.parseInt(firstOctetText.getText().toString()),
                                                     Integer.parseInt(secondOctetText.getText().toString()),
                                                     Integer.parseInt(thirdOctetText.getText().toString()),
                                                     Integer.parseInt(fourthOctetText.getText().toString()),
