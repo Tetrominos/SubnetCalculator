@@ -10,6 +10,9 @@ import android.widget.Toast;
 import android.util.Log;
 
 import com.example.tetrimino.subnetcalculator.programLogic.IPAddressClassA;
+import com.example.tetrimino.subnetcalculator.programLogic.Network;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     private Button goButton;
@@ -32,6 +35,12 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "shit has happened");
                 Toast.makeText(v.getContext(), "You clicked the button", Toast.LENGTH_LONG).show();
                 stuffHappens();
+                try {
+                    Log.d("Ping result", Network.ping("www.google.com"));
+                }
+                catch(Exception e){
+                    Log.d("Ping exception", " Exception: " + e.getMessage());
+                }
             }
         });
     }
@@ -63,4 +72,5 @@ public class MainActivity extends AppCompatActivity {
         firstHost = (TextView) findViewById(R.id.firstHost);
         lastHost = (TextView) findViewById(R.id.lastHost);
     }
+
 }
