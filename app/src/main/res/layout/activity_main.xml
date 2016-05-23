@@ -7,98 +7,116 @@
     tools:context="com.example.tetrimino.subnetcalculator.MainActivity"
     android:background="#F5F5F5">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/cardHolder"
-        android:background="@color/colorPrimary"
-        android:elevation="2dp">
-
-    <android.support.v7.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/card_view"
-        android:layout_gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        card_view:cardCornerRadius="2dp"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:layout_margin="16dp">
-
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerVertical="true"
-            android:id="@+id/relativeLayout">
+            android:layout_height="wrap_content"
+            >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/ipAddressTextView"
-                android:text="Ip Address: "
-                android:textStyle="bold"
-                android:textSize="16sp"
-
-                android:layout_alignParentTop="true"/>
-
-
-            <EditText
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/ipAddressTextView"
-                android:inputType="number"
-                android:digits="1234567890."
-                android:maxLength="16"
-                android:id="@+id/ipAddress"
-                android:imeOptions="actionNext"
-                android:textSize="20sp"
-                />
+                android:id="@+id/cardHolder"
+                android:background="@color/colorPrimary"
+                android:elevation="2dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/ipAddress"
-                android:id="@+id/cidrTextView"
-                android:text="CIDR: "
-                android:textStyle="bold"
-                android:textSize="16sp" />
-
-
-            <EditText
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/card_view"
+                android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/cidrTextView"
-                android:inputType="number"
-                android:digits="1234567890."
-                android:maxLength="2"
-                android:id="@+id/cidr"
-                android:imeOptions="actionNext"
-                android:textSize="20sp"
-                />
+                card_view:cardCornerRadius="2dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_margin="16dp">
 
-            <Button
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="16dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/relativeLayout">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ipAddressTextView"
+                        android:text="Ip Address: "
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+
+                        android:layout_alignParentTop="true"/>
+
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/ipAddressTextView"
+                        android:inputType="number"
+                        android:digits="1234567890."
+                        android:maxLength="16"
+                        android:id="@+id/ipAddress"
+                        android:imeOptions="actionNext"
+                        android:textSize="20sp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/ipAddress"
+                        android:id="@+id/cidrTextView"
+                        android:text="CIDR: "
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/cidrTextView"
+                        android:inputType="number"
+                        android:digits="1234567890."
+                        android:maxLength="2"
+                        android:id="@+id/cidr"
+                        android:imeOptions="actionNext"
+                        android:textSize="20sp"
+                        />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/cidr"
+                        android:id="@+id/goButton"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:text="Calculate"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="-8dp"
+                        android:textColor="@color/colorAccent"
+                        style="?android:attr/borderlessButtonStyle"
+                        />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            </RelativeLayout>
+
+            <ListView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/cidr"
-                android:id="@+id/goButton"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:text="Calculate"/>
+                android:id="@+id/listView"
+                android:layout_below="@id/cardHolder"
+                />
 
         </RelativeLayout>
 
-    </android.support.v7.widget.CardView>
-
-    </RelativeLayout>
-
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView"
-        android:layout_below="@id/cardHolder"
-        />
+    </ScrollView>
 
 </RelativeLayout>

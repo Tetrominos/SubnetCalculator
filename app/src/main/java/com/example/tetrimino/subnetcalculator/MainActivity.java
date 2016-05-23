@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         ListAdapter adapter = new SubnetListViewAdapter(this, R.layout.subnet_list_row, calculationData);
         ListView resultListView = (ListView) findViewById(R.id.listView);
         resultListView.setAdapter(adapter);
+        justifyListViewHeightBasedOnChildren(resultListView);
         ipAddressEditText.clearFocus();
         cidrEditText.clearFocus();
         goButton.requestFocus();
@@ -93,6 +95,26 @@ public class MainActivity extends AppCompatActivity {
     {
         InputMethodManager imm = (InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getApplicationWindowToken(), 0);
+    }
+
+    public void justifyListViewHeightBasedOnChildren (ListView listView) {
+
+        ListAdapter adapter = listView.getAdapter();
+
+        if (adapter == null) {
+            return;
+        }
+        int totalHeight = 0;
+        for (int i = 0; i < adapter.getCount(); i++) {
+            View listItem = adapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams par = listView.getLayoutParams();
+        par.height = totalHeight + (listView.getDividerHeight() * (adapter.getCount() - 1));
+        listView.setLayoutParams(par);
+        listView.requestLayout();
     }
 
 }
