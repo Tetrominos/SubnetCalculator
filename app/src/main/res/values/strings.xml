@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Subnet Calculator</string>
+    <string name="drawer_item_home">Home</string>
+    <string name="drawer_item_ping">Ping</string>
 </resources>
