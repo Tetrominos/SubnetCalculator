@@ -10,8 +10,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.tetrimino.subnetcalculator.programLogic.PingFormatter;
+import com.example.tetrimino.subnetcalculator.programLogic.PingObject;
 
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 import static com.example.tetrimino.subnetcalculator.programLogic.Ping.ping;
 
@@ -32,6 +35,7 @@ public class PingActivity extends AppCompatActivity {
                     PingFormatter pingFormatter = new PingFormatter(addressEditText.getText().toString());
                     pingFormatter.UsePingFunction();
                     pingFormatter.toPingObject();
+                    pingsToCustomListView(pingFormatter.getArrayOfPings());
                 } catch (Exception e){
                     e.getMessage();
                 }
@@ -47,6 +51,10 @@ public class PingActivity extends AppCompatActivity {
         neki = (TextView) findViewById(R.id.testView);
         addressEditText = (EditText) findViewById(R.id.address);
         pingButton = (Button) findViewById(R.id.pingButton);
+    }
+
+    public void pingsToCustomListView(ArrayList<PingObject> pingObjectList){
+        
     }
 
 }
