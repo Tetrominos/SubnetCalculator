@@ -28,7 +28,6 @@ import com.example.tetrimino.subnetcalculator.programLogic.IPAddress;
 public class MainActivity extends AppCompatActivity {
     private Button goButton;
     private EditText ipAddressEditText, cidrEditText;
-    private TextView subnetID, broadcast, firstHost, lastHost;
     private static final String TAG = "MainActivity message";
     static final String STATE_IP = "ip";
     static final String STATE_CIDR = "cidr";

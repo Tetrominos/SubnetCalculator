@@ -35,7 +35,7 @@ public class Ping {
         StringBuffer echo = new StringBuffer();
         Runtime runtime = Runtime.getRuntime();
         Log.v(TAG, "About to ping using runtime.exec");
-        Process proc = runtime.exec("ping -c 4 " + host);
+        Process proc = runtime.exec("ping -c 1 " + host);
         proc.waitFor();
         int exit = proc.exitValue();
         if (exit == 0) {
