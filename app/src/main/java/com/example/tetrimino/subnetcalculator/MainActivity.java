@@ -3,8 +3,10 @@ package com.example.tetrimino.subnetcalculator;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -145,21 +147,33 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onItemClick(AdapterView parent, View view, int position, long id) {
             selectItem(position);
+            mDrawerLayout.closeDrawer(mDrawerList);
         }
     }
 
     /** Swaps fragments in the main content view */
     private void selectItem(int position) {
-        mDrawerList.setItemChecked(position, true);
+
         setTitle(mDrawerItems[position]);
-        mDrawerLayout.closeDrawer(mDrawerList);
-        
+
+        switch(position){
+            case 0:
+                break;
+            case 1:
+                Intent intent = new Intent(this, PingActivity.class);
+                startActivity(intent);
+                break;
+            case 2:
+                break;
+            default:
+                break;
+        }
+
+
     }
 
-    @Override
     public void setTitle(CharSequence title) {
-        CharSequence mTitle = title;
-        getActionBar().setTitle(mTitle);
+        getSupportActionBar().setTitle(title);
     }
 
     }
