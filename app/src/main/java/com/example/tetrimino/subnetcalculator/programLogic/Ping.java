@@ -48,11 +48,11 @@ public class Ping {
             return echo.toString();
             //return getPingStats(echo.toString());
         } else if (exit == 1) {
-            pingError = "failed, exit = 1";
-            return null;
+            pingError = "Unknown host";
+            return pingError;
         } else {
-            pingError = "error, exit = 2";
-            return null;
+            pingError = "Unknown host";
+            return pingError;
         }
     }
 

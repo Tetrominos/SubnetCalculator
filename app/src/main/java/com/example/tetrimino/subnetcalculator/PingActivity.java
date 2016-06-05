@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.tetrimino.subnetcalculator.programLogic.PingFormatter;
+
 import org.w3c.dom.Text;
 
 import static com.example.tetrimino.subnetcalculator.programLogic.Ping.ping;
@@ -27,8 +29,9 @@ public class PingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    neki.setText(ping(addressEditText.getText().toString()));
-                    Log.d("PingLog", ping(addressEditText.getText().toString()));
+                    PingFormatter pingFormatter = new PingFormatter(addressEditText.getText().toString());
+                    pingFormatter.UsePingFunction();
+                    pingFormatter.toPingObject();
                 } catch (Exception e){
                     e.getMessage();
                 }
