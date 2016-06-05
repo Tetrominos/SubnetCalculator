@@ -1,17 +1,22 @@
 package com.example.tetrimino.subnetcalculator;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
-import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.SlidingDrawer;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.util.Log;
@@ -27,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
     static final String STATE_CIDR = "cidr";
     private String currentIp;
     private int currentCIDR;
+    private final String[] mDrawerItems = {"Calculate", "Ping", "Settings"};
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initializeInput();
+
+        initializeDrawer();
 
         //restores previous state in case of change
         if(savedInstanceState != null){
@@ -78,6 +88,16 @@ public class MainActivity extends AppCompatActivity {
         goButton = (Button) findViewById(R.id.goButton);
     }
 
+    public void initializeDrawer(){
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+
+        // Set the adapter for the list view
+        mDrawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mDrawerItems));
+        // Set the list's click listener
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+    }
+
     @Override
     protected void onSaveInstanceState(Bundle savedInstanceState) {
         savedInstanceState.putString(STATE_IP, currentIp);
@@ -98,10 +118,13 @@ public class MainActivity extends AppCompatActivity {
         imm.hideSoftInputFromWindow(view.getApplicationWindowToken(), 0);
     }
 
+    /**
+     * Precalculates ListView, making it possible for the ListView to be used inside a ScrollView
+     * Always use after setting the adapter
+     * @param listView  Listview that gets the pretedermined height
+     */
     public void justifyListViewHeightBasedOnChildren (ListView listView) {
-
         ListAdapter adapter = listView.getAdapter();
-
         if (adapter == null) {
             return;
         }
@@ -118,6 +141,26 @@ public class MainActivity extends AppCompatActivity {
         listView.requestLayout();
     }
 
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView parent, View view, int position, long id) {
+            selectItem(position);
+        }
+    }
 
-}
+    /** Swaps fragments in the main content view */
+    private void selectItem(int position) {
+        mDrawerList.setItemChecked(position, true);
+        setTitle(mDrawerItems[position]);
+        mDrawerLayout.closeDrawer(mDrawerList);
+        
+    }
+
+    @Override
+    public void setTitle(CharSequence title) {
+        CharSequence mTitle = title;
+        getActionBar().setTitle(mTitle);
+    }
+
+    }
 
