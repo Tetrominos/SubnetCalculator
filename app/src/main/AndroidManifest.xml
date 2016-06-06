@@ -19,9 +19,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.tetrimino.subnetcalculator.PingActivity"
-            android:label="@string/ping_activity_name"
-            />
+            android:name=".PingActivity"
+            android:label="@string/ping_activity_name" />
     </application>
 
 </manifest>

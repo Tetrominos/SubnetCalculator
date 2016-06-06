@@ -31,7 +31,7 @@ public class PingActivity extends AppCompatActivity {
     private EditText addressEditText;
     private Button pingButton;
     static final String STATE_HOST = "host";
-    private final String[] mDrawerItems = {"Calculate", "Ping", "Settings"};
+    private String[] mDrawerItems;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
 
@@ -117,6 +117,7 @@ public class PingActivity extends AppCompatActivity {
     }
 
     public void initializeDrawer(){
+        mDrawerItems = getResources().getStringArray(R.array.drawer_items);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
@@ -137,8 +138,6 @@ public class PingActivity extends AppCompatActivity {
     /** Swaps fragments in the main content view */
     private void selectItem(int position) {
 
-        setTitle(mDrawerItems[position]);
-
         switch(position){
             case 0:
                 Intent intent = new Intent(this, MainActivity.class);
@@ -146,12 +145,9 @@ public class PingActivity extends AppCompatActivity {
                 break;
             case 1:
                 break;
-            case 2:
-                break;
             default:
                 break;
         }
-
 
     }
 

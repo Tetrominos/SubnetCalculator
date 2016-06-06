@@ -49,7 +49,7 @@ public class PingFormatter {
     }
 
     public String setAddress(int i){
-        address = arrayOfPingResults.get(i).substring(arrayOfPingResults.get(i).indexOf("from "), arrayOfPingResults.get(i).indexOf(": icmp_seq"));
+        address = arrayOfPingResults.get(i).substring(arrayOfPingResults.get(i).indexOf("from ")+5, arrayOfPingResults.get(i).indexOf(": icmp_seq"));
         return address;
     }
 

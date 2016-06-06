@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Subnet Calculator</string>
     <string name="ping_activity_name">Ping</string>
-    <string name="drawer_item_home">Home</string>
-    <string name="drawer_item_ping">Ping</string>
+    <string name="ip_address">Ip Address:</string>
+    <string name="cidr">CIDR:</string>
+    <string name="calculate">Calculate</string>
+    <string name="address">Address:</string>
 </resources>

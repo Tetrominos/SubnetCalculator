@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     static final String STATE_CIDR = "cidr";
     private String currentIp;
     private int currentCIDR;
-    private final String[] mDrawerItems = {"Calculate", "Ping", "Settings"};
+    private String[] mDrawerItems;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
 
@@ -50,7 +50,9 @@ public class MainActivity extends AppCompatActivity {
         if(savedInstanceState != null){
             currentIp = savedInstanceState.getString(STATE_IP);
             currentCIDR = savedInstanceState.getInt(STATE_CIDR);
-            calculate();
+            if(!(currentIp == null)) {
+                calculate();
+            }
         }
 
         //goButton saves current state and calls the calculate method, calls hideSoftKeyboard method.
@@ -133,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void initializeDrawer(){
+        mDrawerItems = getResources().getStringArray(R.array.drawer_items);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
@@ -153,8 +156,6 @@ public class MainActivity extends AppCompatActivity {
     /** Swaps fragments in the main content view */
     private void selectItem(int position) {
 
-        setTitle(mDrawerItems[position]);
-
         switch(position){
             case 0:
                 break;
@@ -162,12 +163,9 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, PingActivity.class);
                 startActivity(intent);
                 break;
-            case 2:
-                break;
             default:
                 break;
         }
-
 
     }
 
