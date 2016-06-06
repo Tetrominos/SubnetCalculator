@@ -89,16 +89,6 @@ public class MainActivity extends AppCompatActivity {
         goButton = (Button) findViewById(R.id.goButton);
     }
 
-    public void initializeDrawer(){
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
-
-        // Set the adapter for the list view
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mDrawerItems));
-        // Set the list's click listener
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-    }
-
     @Override
     protected void onSaveInstanceState(Bundle savedInstanceState) {
         savedInstanceState.putString(STATE_IP, currentIp);
@@ -140,6 +130,16 @@ public class MainActivity extends AppCompatActivity {
         par.height = totalHeight + (listView.getDividerHeight() * (adapter.getCount() - 1));
         listView.setLayoutParams(par);
         listView.requestLayout();
+    }
+
+    public void initializeDrawer(){
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+
+        // Set the adapter for the list view
+        mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, mDrawerItems));
+        // Set the list's click listener
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {

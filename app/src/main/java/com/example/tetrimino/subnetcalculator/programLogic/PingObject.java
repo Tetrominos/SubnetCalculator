@@ -6,11 +6,11 @@ package com.example.tetrimino.subnetcalculator.programLogic;
 public class PingObject {
     private int sizeInBytes;
     private int ttl;
-    private int time;
+    private double time;
     private int sequence;
     private String address;
 
-    public PingObject (int sizeInBytes, int ttl, int time, int sequence, String address){
+    public PingObject (int sizeInBytes, int ttl, double time, int sequence, String address){
         this.sizeInBytes = sizeInBytes;
         this.ttl = ttl;
         this.time = time;
@@ -34,11 +34,11 @@ public class PingObject {
         this.ttl = ttl;
     }
 
-    public int getTime() {
+    public double getTime() {
         return time;
     }
 
-    public void setTime(int time) {
+    public void setTime(double time) {
         this.time = time;
     }
 

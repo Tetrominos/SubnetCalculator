@@ -19,10 +19,12 @@ import static com.example.tetrimino.subnetcalculator.programLogic.Ping.ping;
  */
 public class PingFormatter {
     String host, tempResult = null, address;
-    int time, ttl;
+    int ttl;
+    double time;
     public static final int NUMBER_OF_PINGS = 3, SIZE_IN_BYTES = 64, FIRST_PRIO = 10, SECOND_PRIO = 9, THIRD_PRIO = 8;
     ArrayList<String> arrayOfPingResults = new ArrayList<String>();
     ArrayList<PingObject> arrayOfPings = new ArrayList<PingObject>();
+
     public PingFormatter(String host){
         this.host = host;
     }
@@ -41,20 +43,27 @@ public class PingFormatter {
         int tempSequenceNum = 0;
         for(int i = 0; i < NUMBER_OF_PINGS; i++){
             tempSequenceNum = i+1;
-            arrayOfPings.add(new PingObject(SIZE_IN_BYTES, setTtl(i), setTime(i), tempSequenceNum, setAddress(i)));
+            PingObject x = new PingObject(SIZE_IN_BYTES, setTtl(i), setTime(i), tempSequenceNum, setAddress(i));
+            arrayOfPings.add(x);
         }
     }
 
     public String setAddress(int i){
-        return arrayOfPingResults.get(i).substring(arrayOfPingResults.get(i).indexOf("from "), arrayOfPingResults.get(i).indexOf(": icmp_seq"));
+        address = arrayOfPingResults.get(i).substring(arrayOfPingResults.get(i).indexOf("from "), arrayOfPingResults.get(i).indexOf(": icmp_seq"));
+        return address;
     }
 
     public int setTtl(int i){
-        return Integer.parseInt(arrayOfPingResults.get(i).substring(arrayOfPingResults.get(i).indexOf("ttl="), arrayOfPingResults.get(i).indexOf(" time")));
+        ttl = Integer.parseInt(arrayOfPingResults.get(i).substring(arrayOfPingResults.get(i).indexOf("ttl=")+4, arrayOfPingResults.get(i).indexOf(" time")));
+        return ttl;
     }
 
-    public int setTime(int i){
-        return Integer.parseInt(arrayOfPingResults.get(i).substring(arrayOfPingResults.get(i).indexOf("time="), arrayOfPingResults.get(i).indexOf(" ms")));
+    public double setTime(int i){
+        String tempString = arrayOfPingResults.get(i).substring(arrayOfPingResults.get(i).indexOf("time=")+5, arrayOfPingResults.get(i).indexOf(" ms"));
+        String tempString2 = arrayOfPingResults.get(i).substring(arrayOfPingResults.get(i).indexOf("time=")+5, arrayOfPingResults.get(i).indexOf(" ms"));
+
+        time = Double.parseDouble(arrayOfPingResults.get(i).substring(arrayOfPingResults.get(i).indexOf("time=")+5, arrayOfPingResults.get(i).indexOf(" ms")));
+        return time;
     }
 
     public ArrayList<PingObject> getArrayOfPings(){
