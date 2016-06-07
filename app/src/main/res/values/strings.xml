@@ -1,8 +1,12 @@
 <resources>
-    <string name="app_name">Subnet Calculator</string>
+    <string name="app_name">Network Helper</string>
+    <string name="main_activity_name">Subnet calculator</string>
     <string name="ping_activity_name">Ping</string>
     <string name="ip_address">Ip Address:</string>
     <string name="cidr">CIDR:</string>
     <string name="calculate">Calculate</string>
     <string name="address">Address:</string>
+    <string name="drawer_open">open</string>
+    <string name="drawer_close">closed</string>
+    <string name="invalid_input">The IP address or CIDR you have entered is invalid, please try again</string>
 </resources>

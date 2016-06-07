@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Kalkulator podmreža</string>
+    <string name="app_name">Network Helper</string>
+    <string name="main_activity_name">Kalkulator podmreža</string>
     <string name="ping_activity_name">Ping</string>
     <string name="ip_address">Ip Adresa:</string>
     <string name="cidr">CIDR:</string>
-    <string name="calculate">Izračuna</string>
+    <string name="calculate">Izračunaj</string>
     <string name="address">Adresa:</string>
+    <string name="drawer_open">open</string>
+    <string name="drawer_close">closed</string>
+    <string name="invalid_input">Unijeli ste nevažeču IP adresu ili CIDR, molimo pokušajte ponovno</string>
 </resources>
