@@ -35,7 +35,7 @@ public class Ping {
         StringBuffer echo = new StringBuffer();
         Runtime runtime = Runtime.getRuntime();
         Log.v(TAG, "About to ping using runtime.exec");
-        Process proc = runtime.exec("ping -c 4 " + host);
+        Process proc = runtime.exec("ping -c 1 " + host);
         proc.waitFor();
         int exit = proc.exitValue();
         if (exit == 0) {
@@ -48,11 +48,11 @@ public class Ping {
             return echo.toString();
             //return getPingStats(echo.toString());
         } else if (exit == 1) {
-            pingError = "failed, exit = 1";
-            return null;
+            pingError = "Unknown host";
+            return pingError;
         } else {
-            pingError = "error, exit = 2";
-            return null;
+            pingError = "Unknown host";
+            return pingError;
         }
     }
 

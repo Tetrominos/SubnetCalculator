@@ -3,10 +3,14 @@ package com.example.tetrimino.subnetcalculator;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -26,20 +30,21 @@ import com.example.tetrimino.subnetcalculator.programLogic.IPAddress;
 public class MainActivity extends AppCompatActivity {
     private Button goButton;
     private EditText ipAddressEditText, cidrEditText;
-    private TextView subnetID, broadcast, firstHost, lastHost;
     private static final String TAG = "MainActivity message";
     static final String STATE_IP = "ip";
     static final String STATE_CIDR = "cidr";
     private String currentIp;
     private int currentCIDR;
-    private final String[] mDrawerItems = {"Calculate", "Ping", "Settings"};
+    private String[] mDrawerItems;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
+    private ActionBarDrawerToggle mDrawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle(R.string.main_activity_name);
 
         initializeInput();
 
@@ -49,19 +54,26 @@ public class MainActivity extends AppCompatActivity {
         if(savedInstanceState != null){
             currentIp = savedInstanceState.getString(STATE_IP);
             currentCIDR = savedInstanceState.getInt(STATE_CIDR);
-            calculate();
+            if(!(currentIp == null)) {
+                calculate();
+            }
         }
 
         //goButton saves current state and calls the calculate method, calls hideSoftKeyboard method.
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "The calculate button was pressed");
-                currentIp = ipAddressEditText.getText().toString();
-                currentCIDR = Integer.parseInt(cidrEditText.getText().toString());
-                calculate();
-                hideSoftKeyboard(MainActivity.this, v);
+                try{
+                    Log.d(TAG, "The calculate button was pressed");
+                    currentIp = ipAddressEditText.getText().toString();
+                    currentCIDR = Integer.parseInt(cidrEditText.getText().toString());
+                        calculate();
+                    hideSoftKeyboard(MainActivity.this, v);
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.invalid_input), Toast.LENGTH_LONG).show();
+                }
             }
+
         });
     }
 
@@ -86,16 +98,6 @@ public class MainActivity extends AppCompatActivity {
         ipAddressEditText = (EditText) findViewById(R.id.ipAddress);
         cidrEditText = (EditText) findViewById(R.id.cidr);
         goButton = (Button) findViewById(R.id.goButton);
-    }
-
-    public void initializeDrawer(){
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
-
-        // Set the adapter for the list view
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mDrawerItems));
-        // Set the list's click listener
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
     }
 
     @Override
@@ -141,25 +143,82 @@ public class MainActivity extends AppCompatActivity {
         listView.requestLayout();
     }
 
+    public void initializeDrawer(){
+        mDrawerItems = getResources().getStringArray(R.array.drawer_items);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+
+                invalidateOptionsMenu();
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                Log.d(TAG, "onDrawerClosed: " + getTitle());
+
+                invalidateOptionsMenu();
+            }
+        };
+
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        // Set the adapter for the list view
+        mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, mDrawerItems));
+        // Set the list's click listener
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView parent, View view, int position, long id) {
             selectItem(position);
+            mDrawerLayout.closeDrawer(mDrawerList);
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Pass the event to ActionBarDrawerToggle
+        // If it returns true, then it has handled
+        // the nav drawer indicator touch event
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+        // Handle your other action bar items...
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mDrawerToggle.syncState();
     }
 
     /** Swaps fragments in the main content view */
     private void selectItem(int position) {
-        mDrawerList.setItemChecked(position, true);
-        setTitle(mDrawerItems[position]);
-        mDrawerLayout.closeDrawer(mDrawerList);
-        
+
+        switch(position){
+            case 0:
+                break;
+            case 1:
+                Intent intent = new Intent(this, PingActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
+
     }
 
-    @Override
     public void setTitle(CharSequence title) {
-        CharSequence mTitle = title;
-        getActionBar().setTitle(mTitle);
+        getSupportActionBar().setTitle(title);
     }
 
     }
